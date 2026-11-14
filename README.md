@@ -49,7 +49,7 @@ composer require --dev diddyy/plumbline
 php artisan plumbline:scan        # or: vendor/bin/plumbline scan
 ```
 
-Works with Laravel 10 and later (Symfony Console 6.4, 7 or 8) on PHP 8.3+. The artisan commands register
+Tested with Laravel 11–13 (Symfony Console 7 and 8) on PHP 8.3–8.5. Laravel 10 (Symfony 6.4) is allowed by the constraints but not yet tested. The artisan commands register
 through package auto-discovery.
 
 It never boots your app or runs your code, so it's safe to point at anything.

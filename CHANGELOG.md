@@ -10,7 +10,7 @@ All notable changes to this project are documented here. The format follows
 - AUTHZ-002: Livewire actions that change a browser-chosen record without an authorization check.
   Experimental: not yet benchmarked on real Livewire apps.
 - `php artisan plumbline:scan` and `plumbline:rules` via package auto-discovery.
-- Support for Symfony Console 6.4 and 8 (Laravel 10 and 13).
+- Support for Symfony Console 8 (current Laravel). Symfony 6.4 (Laravel 10) is allowed but untested.
 
 ### Fixed
 - Open-redirect checks respect custom validation rules (e.g. `new IsValidOriginUrl()`) and FormRequests that build `$rules` in a variable.
