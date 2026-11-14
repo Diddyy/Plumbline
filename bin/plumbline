@@ -1,0 +1,28 @@
+#!/usr/bin/env php
+<?php
+
+declare(strict_types=1);
+
+use Plumbline\Console\RulesCommand;
+use Plumbline\Console\ScanCommand;
+use Plumbline\Plumbline;
+use Symfony\Component\Console\Application;
+
+foreach ([__DIR__.'/../vendor/autoload.php', __DIR__.'/../../../autoload.php'] as $autoload) {
+    if (is_file($autoload)) {
+        require $autoload;
+        break;
+    }
+}
+
+// ASTs for a large app don't fit in PHP's default 128M.
+$limit = ini_get('memory_limit');
+if ($limit !== '-1' && $limit !== false && (int) $limit < 1024 && ! str_ends_with(strtoupper($limit), 'G')) {
+    ini_set('memory_limit', '1G');
+}
+
+$application = new Application('Plumbline', Plumbline::VERSION);
+$application->add(new ScanCommand());
+$application->add(new RulesCommand());
+$application->setDefaultCommand('scan');
+$application->run();

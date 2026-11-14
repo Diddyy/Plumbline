@@ -1,0 +1,49 @@
+name: Plumbline
+description: Precision-first security scanner for Laravel. Uploads findings to GitHub code scanning.
+branding:
+  icon: shield
+  color: blue
+
+inputs:
+  path:
+    description: Path of the Laravel project to scan
+    default: '.'
+  baseline:
+    description: Optional baseline file; findings recorded in it are ignored
+    default: ''
+  min-severity:
+    description: Minimum severity to report (low, medium, high, critical)
+    default: low
+  fail-on:
+    description: Fail the job when a finding at or above this severity remains (or "none")
+    default: high
+  version:
+    description: Plumbline version constraint to install
+    default: '^0.1'
+
+runs:
+  using: composite
+  steps:
+    - name: Install Plumbline
+      shell: bash
+      run: composer global require "diddyy/plumbline:${{ inputs.version }}" --no-interaction --quiet
+
+    - name: Scan
+      id: scan
+      shell: bash
+      run: |
+        BASELINE_ARG=""
+        if [ -n "${{ inputs.baseline }}" ]; then BASELINE_ARG="--baseline=${{ inputs.baseline }}"; fi
+        "$(composer global config bin-dir --absolute --quiet)/plumbline" scan "${{ inputs.path }}" \
+          --format=sarif --output=plumbline.sarif --fail-on=none \
+          --min-severity="${{ inputs.min-severity }}" $BASELINE_ARG
+        "$(composer global config bin-dir --absolute --quiet)/plumbline" scan "${{ inputs.path }}" \
+          --format=github --fail-on="${{ inputs.fail-on }}" \
+          --min-severity="${{ inputs.min-severity }}" $BASELINE_ARG
+
+    - name: Upload SARIF
+      if: always()
+      uses: github/codeql-action/upload-sarif@v3
+      with:
+        sarif_file: plumbline.sarif
+        category: plumbline

@@ -1,0 +1,10 @@
+[
+    { "name": "bookstack", "repo": "https://github.com/BookStackApp/BookStack.git", "license": "MIT" },
+    { "name": "koel", "repo": "https://github.com/koel/koel.git", "license": "MIT" },
+    { "name": "monica", "repo": "https://github.com/monicahq/monica.git", "license": "AGPL-3.0" },
+    { "name": "linkace", "repo": "https://github.com/Kovah/LinkAce.git", "license": "GPL-3.0" },
+    { "name": "pixelfed", "repo": "https://github.com/pixelfed/pixelfed.git", "license": "AGPL-3.0" },
+    { "name": "firefly-iii", "repo": "https://github.com/firefly-iii/firefly-iii.git", "license": "AGPL-3.0" },
+    { "name": "speedtest-tracker", "repo": "https://github.com/alexjustesen/speedtest-tracker.git", "license": "MIT" },
+    { "name": "solidtime", "repo": "https://github.com/solidtime-io/solidtime.git", "license": "AGPL-3.0" }
+]

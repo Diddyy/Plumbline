@@ -1,0 +1,7 @@
+* text=auto eol=lf
+*.png binary
+/tests export-ignore
+/bench export-ignore
+/.github export-ignore
+/phpunit.xml export-ignore
+/phpstan.neon export-ignore

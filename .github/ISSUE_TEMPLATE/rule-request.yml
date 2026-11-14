@@ -1,0 +1,21 @@
+name: Rule request / missed vulnerability
+description: A vulnerable Laravel pattern that Plumbline should catch
+labels: [rule-request]
+body:
+  - type: textarea
+    id: vulnerable
+    attributes:
+      label: Vulnerable code
+      render: php
+    validations:
+      required: true
+  - type: textarea
+    id: safe
+    attributes:
+      label: The safe version (what developers should write instead)
+      render: php
+  - type: textarea
+    id: impact
+    attributes:
+      label: Impact and references
+      description: What can an attacker do? Links to advisories, CWE or write-ups are welcome.

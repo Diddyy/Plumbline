@@ -1,0 +1,12 @@
+/vendor/
+/composer.lock
+/.phpunit.cache/
+/.phpunit.result.cache
+/plumbline-report.*
+/bench/work/
+/bench/results/
+/.idea/
+/.vscode/
+
+# Root-level env files only. Test fixtures deliberately contain .env files.
+/.env

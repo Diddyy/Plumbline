@@ -1,0 +1,47 @@
+{
+    "name": "diddyy/plumbline",
+    "description": "A precision-first static security scanner for Laravel applications. The scanner that doesn't cry wolf.",
+    "type": "library",
+    "license": "MIT",
+    "keywords": ["laravel", "security", "static-analysis", "sast", "sarif", "scanner", "idor", "sql-injection", "livewire"],
+    "homepage": "https://github.com/Diddyy/Plumbline",
+    "support": {
+        "issues": "https://github.com/Diddyy/Plumbline/issues",
+        "source": "https://github.com/Diddyy/Plumbline",
+        "security": "https://github.com/Diddyy/Plumbline/security/policy"
+    },
+    "require": {
+        "php": "^8.3",
+        "nikic/php-parser": "^5.0",
+        "symfony/console": "^7.0",
+        "symfony/finder": "^7.0"
+    },
+    "require-dev": {
+        "justinrainbow/json-schema": "^6.14",
+        "pestphp/pest": "^3.0",
+        "phpstan/phpstan": "^2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Plumbline\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Plumbline\\Tests\\": "tests/"
+        }
+    },
+    "bin": ["bin/plumbline"],
+    "scripts": {
+        "test": "pest",
+        "analyse": "phpstan analyse"
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}

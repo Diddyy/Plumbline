@@ -1,0 +1,29 @@
+name: False positive
+description: Plumbline reported something that isn't a real problem
+labels: [false-positive]
+body:
+  - type: input
+    id: rule
+    attributes:
+      label: Rule ID
+      placeholder: SQLI-001
+    validations:
+      required: true
+  - type: textarea
+    id: code
+    attributes:
+      label: Minimal code that triggers it
+      description: Please reduce it to the smallest example. Don't paste private application code.
+      render: php
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why this is safe
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Plumbline version
