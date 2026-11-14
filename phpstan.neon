@@ -2,4 +2,7 @@ parameters:
     level: 6
     paths:
         - src
+    excludePaths:
+        # Only loaded inside a Laravel app, where illuminate/* is available.
+        - src/Laravel
     treatPhpDocTypesAsCertain: false

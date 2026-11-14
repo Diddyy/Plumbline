@@ -8,6 +8,7 @@ use Plumbline\Rules\BladeRawEcho;
 use Plumbline\Rules\CommandInjection;
 use Plumbline\Rules\CsrfExclusion;
 use Plumbline\Rules\DebugModeInProduction;
+use Plumbline\Rules\LivewireAuthorization;
 use Plumbline\Rules\MassAssignment;
 use Plumbline\Rules\MissingAuthentication;
 use Plumbline\Rules\MissingAuthorization;
@@ -33,6 +34,7 @@ final class Plumbline
             new UnsafeDeserialization(),
             new MassAssignment(),
             new MissingAuthorization(),
+            new LivewireAuthorization(),
             new MissingAuthentication(),
             new BladeRawEcho(),
             new OpenRedirect(),

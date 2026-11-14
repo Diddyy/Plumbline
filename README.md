@@ -46,8 +46,11 @@ when it can explain *why* something is exploitable:
 
 ```bash
 composer require --dev diddyy/plumbline
-vendor/bin/plumbline scan
+php artisan plumbline:scan        # or: vendor/bin/plumbline scan
 ```
+
+Works with Laravel 10 and later (Symfony Console 6.4, 7 or 8) on PHP 8.3+. The artisan commands register
+through package auto-discovery.
 
 It never boots your app or runs your code, so it's safe to point at anything.
 
@@ -60,6 +63,7 @@ It never boots your app or runs your code, so it's safe to point at anything.
 | [DESER-001](docs/rules/DESER-001.md) | `unserialize()` on user input | High |
 | [MASS-001](docs/rules/MASS-001.md) | `$request->all()` written to an unguarded model, a builder `update()`, or one with `is_admin`/`role` in `$fillable` | High |
 | [AUTHZ-001](docs/rules/AUTHZ-001.md) | Signed-in route updates or deletes a URL-chosen model with no authorization check (IDOR) | High |
+| [AUTHZ-002](docs/rules/AUTHZ-002.md) | Livewire action updates or deletes a record chosen by the browser (`$wire.delete(42)`) with no authorization check *(experimental)* | High |
 | [AUTH-001](docs/rules/AUTH-001.md) | Route with no auth middleware that changes existing records | High |
 | [XSS-001](docs/rules/XSS-001.md) | `{!! !!}` with request data (High), unsafe Markdown (Medium), other raw output (Low) | High–Low |
 | [REDIR-001](docs/rules/REDIR-001.md) | Redirects to user-supplied URLs | Medium |
@@ -136,7 +140,6 @@ Findings appear in the repository's **Security → Code scanning** tab and as an
 ## Limits (honest ones)
 
 - Taint tracking stays within one function. A value passed into a helper method and used there is not followed yet.
-- Livewire/Volt component *actions* aren't checked for authorization yet (AUTHZ-001 covers controllers and route closures).
 - AUTHZ-001 can't know whether every signed-in user is meant to be an admin. Suppress it, or use a baseline, if that's your app.
 - Plumbline doesn't replace a dependency audit. Run `composer audit` as well.
 

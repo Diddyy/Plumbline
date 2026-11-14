@@ -38,6 +38,12 @@ final class RouteAction
     ) {
     }
 
+    /** Wrap any method (e.g. a Livewire action) to reuse the authorization-evidence checks. */
+    public static function forMethod(Stmt\ClassMethod $method, ClassInfo $class, Project $project): self
+    {
+        return new self($method, $class, $class->file, $project);
+    }
+
     public static function for(Route $route, Project $project): ?self
     {
         if ($route->closure !== null) {

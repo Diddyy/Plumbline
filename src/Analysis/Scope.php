@@ -97,6 +97,22 @@ final class Scope
         }
     }
 
+    /** @var array<string, true> input keys checked by a custom validation rule */
+    private array $customValidated = [];
+
+    /** @param list<string> $keys */
+    public function addCustomValidated(array $keys): void
+    {
+        foreach ($keys as $key) {
+            $this->customValidated[$key] = true;
+        }
+    }
+
+    public function hasCustomValidation(?string $key): bool
+    {
+        return $key !== null && isset($this->customValidated[$key]);
+    }
+
     public function isValidatedSafe(?string $key): bool
     {
         return $key !== null && ($this->validation[$key] ?? false);

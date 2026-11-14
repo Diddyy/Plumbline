@@ -22,7 +22,7 @@ if ($limit !== '-1' && $limit !== false && (int) $limit < 1024 && ! str_ends_wit
 }
 
 $application = new Application('Plumbline', Plumbline::VERSION);
-$application->add(new ScanCommand());
-$application->add(new RulesCommand());
+// addCommands() exists in Symfony Console 7 and 8 (add() was removed in 8).
+$application->addCommands([new ScanCommand(), new RulesCommand()]);
 $application->setDefaultCommand('scan');
 $application->run();

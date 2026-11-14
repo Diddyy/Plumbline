@@ -15,12 +15,21 @@ jobs:
       fail-fast: false
       matrix:
         php: ['8.3', '8.4', '8.5']
+        deps: [highest]
+        include:
+          # Oldest supported dependencies (Symfony 6.4, as used by Laravel 10).
+          - php: '8.3'
+            deps: lowest
+    name: PHP ${{ matrix.php }} (${{ matrix.deps }})
     steps:
       - uses: actions/checkout@v4
       - uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
           coverage: none
-      - run: composer install --no-interaction --prefer-dist
+      - run: composer update --no-interaction --prefer-dist ${{ matrix.deps == 'lowest' && '--prefer-lowest --prefer-stable' || '' }}
       - run: vendor/bin/pest
       - run: vendor/bin/phpstan analyse --no-progress
+        if: matrix.deps == 'highest'
+      - name: Self-check the CLI
+        run: php bin/plumbline scan tests/Fixtures/apps/laravel --fail-on=low

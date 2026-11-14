@@ -15,12 +15,12 @@ November 2026). Reproduce with `php bench/run.php`.
 | solidtime | `9c4e9f3` | 504 | 0 | 0 |
 | laravel/laravel, react-starter-kit | | | 0 | 0 |
 
-Medium findings: 2 across all apps, from one pattern in one app. It is being verified by hand and,
-if confirmed, will be reported privately to the maintainers. The app isn't named here until a fix ships.
-
 ## Triage
 
-- **Critical/High: 0.** None of these mature apps had a Critical or High finding. Plumbline reported none.
+- **Critical/High/Medium: 0.** An earlier build reported an open redirect in Firefly III. Checking
+  it by hand showed the input is validated by a custom `IsValidOriginUrl` rule in the FormRequest,
+  so it was a false positive. Plumbline now treats custom validation rules on the redirect input as
+  a check, and that case is a fixture.
 - **Low (88):** all are XSS-001 "review" findings: `{!! $model->field !!}` or a translation with
   dynamic replacements, printing stored data without escaping. They're accurate (the output is
   unescaped). Whether each is exploitable depends on whether the stored HTML was sanitised on the

@@ -39,6 +39,10 @@ final class OpenRedirect implements TaintRule
         if (! $value->tainted || preg_match('/(->|::)(fullurl|fullurlwithquery|url|path|decodedpath)\(/i', $value->source)) {
             return;
         }
+        // '_from' => ['nullable', new IsValidOriginUrl()]: a custom rule checks exactly this field.
+        if (preg_match("/\\('([^']+)'/", $value->source, $key) && $scope->hasCustomValidation($key[1])) {
+            return;
+        }
         if ($this->isSameOriginChecked($target, $scope) || $this->startsWithLocalPath($this->resolve($target, $node, $context), $value->source)
             || $this->parsesTarget($target, $context)) {
             return;

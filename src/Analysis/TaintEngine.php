@@ -257,6 +257,7 @@ final class TaintEngine
                     $info = $classes->get($type);
                     if ($info !== null) {
                         $this->scope->addValidation(ValidationRules::fromFormRequest($info));
+                        $this->scope->addCustomValidated(ValidationRules::customRuleKeysFromFormRequest($info));
                     }
                 }
             }
@@ -294,6 +295,7 @@ final class TaintEngine
 
         if ($rules !== null) {
             $this->scope->addValidation(ValidationRules::fromArray($rules));
+            $this->scope->addCustomValidated(ValidationRules::customRuleKeys($rules));
         }
     }
 
